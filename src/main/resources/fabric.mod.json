@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "id": "starter",
+  "id": "infraredstone",
   "version": "${version}",
 
-  "name": "Fabric Starter",
-  "icon": "assets/starter/icon.png",
-  "description": "Template for starting out Fabric mods",
+  "name": "InfraRedstone",
+  "icon": "assets/infraredstone/icon.png",
+  "description": "A step beyond redstone",
   "license": "MIT",
   "contact": {
-    "sources": "https://github.com/CottonMC/FabricStarter"
+    "sources": "https://github.com/InfraRedstone/InfraRedstone"
   },
   "environment": "*",
   "entrypoints": {
@@ -21,8 +21,5 @@
   ],
   "depends": {
     "fabricloader": ">=0.4.0"
-  },
-  "custom": {
-    "modmenu:api": true
   }
 }

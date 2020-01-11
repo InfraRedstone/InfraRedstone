@@ -1,0 +1,26 @@
+{
+  "textures": {
+    "base": "infraredstone:block/xor_gate",
+    "particle": "infraredstone:block/xor_gate",
+    "side": "infraredstone:block/pcb_slate",
+    "light": "infraredstone:block/lights"
+  },
+  "parts": [
+    {
+      "type": "external",
+      "part": "infraredstone:base"
+    },
+    {
+      "type": "external",
+      "part": "infraredstone:boolean_light"
+    },
+    {
+      "type": "external",
+      "part": "infraredstone:xor_gate/left_light"
+    },
+    {
+      "type": "external",
+      "part": "infraredstone:xor_gate/right_light"
+    }
+  ]
+}

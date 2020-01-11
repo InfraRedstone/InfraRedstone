@@ -1,0 +1,20 @@
+{
+  "multipart": [
+    { "apply": { "model": "infraredstone:block/cable/scaffold_none" }},
+    {   "when": { "north": "true" },
+      "apply": { "model": "infraredstone:block/cable/scaffold_side" }
+    },
+    {   "when": { "east": "true" },
+      "apply": { "model": "infraredstone:block/cable/scaffold_side", "y": 90 }
+    },
+    {   "when": { "south": "true" },
+      "apply": { "model": "infraredstone:block/cable/scaffold_side", "y": 180 }
+    },
+    {   "when": { "west": "true" },
+      "apply": { "model": "infraredstone:block/cable/scaffold_side", "y": 270 }
+    },
+    {   "when": { "up": "true" },
+      "apply": { "model": "infraredstone:block/cable/scaffold_up" }
+    }
+  ]
+}
