@@ -13,12 +13,9 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.cottonmc.starter.FabricStarter"
+      "com.elytradev.infraredstone.InfraRedstone"
     ]
   },
-  "mixins": [
-    "mixins.starter.json"
-  ],
   "depends": {
     "fabricloader": ">=0.4.0"
   }

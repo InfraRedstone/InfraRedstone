@@ -1,11 +1,11 @@
-package io.github.cottonmc.starter;
+package com.elytradev.infraredstone;
 
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class FabricStarter implements ModInitializer {
-	public static final String MODID = "starter";
+public class InfraRedstone implements ModInitializer {
+	public static final String MODID = "infraredstone";
 
 	public static final Logger logger = LogManager.getLogger();
 
