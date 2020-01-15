@@ -15,4 +15,8 @@ public class InRedBlocks {
         return block;
     }
 
+    public static void init() {
+
+	}
+
 }
