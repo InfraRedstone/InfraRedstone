@@ -12,5 +12,7 @@ public class InfraRedstone implements ModInitializer {
 	@Override
 	public void onInitialize() {
 
+
+		System.out.println("I have initialized. UwU");
 	}
 }
