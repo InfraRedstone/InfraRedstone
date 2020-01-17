@@ -8,6 +8,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class InRedBlocks {
+    public static final Block INFRA_REDSTONE = register(new Block(FabricBlockSettings.of(Material.PART).build()), "infra_redstone");
     public static final Block AND_GATE = register(new Block(FabricBlockSettings.of(Material.PART).build()), "and_gate");
 
     public static Block register(Block block, String name) {
