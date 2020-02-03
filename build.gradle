@@ -38,7 +38,7 @@ dependencies {
 	modApi "io.github.prospector:modmenu:1.8.4+build.20"
 
 	// excluding because we want to avoid an old, broken version of modmenu
-	modImplementation("me.shedaniel:RoughlyEnoughItems:3.3.8") { exclude module: "ModMenu" }
+	//modImplementation("me.shedaniel:RoughlyEnoughItems:3.3.8") { exclude module: "ModMenu" }
 }
 
 processResources {
