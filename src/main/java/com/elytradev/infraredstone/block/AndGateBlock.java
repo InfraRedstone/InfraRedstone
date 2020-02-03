@@ -22,6 +22,10 @@ public class AndGateBlock extends Block implements Waterloggable {
 
 	public AndGateBlock(Settings settings) {
 		super(settings);
+		setDefaultState(this.getStateManager().getDefaultState()
+				.with(WATERLOGGED, false)
+				.with(BOOLEAN_MODE, false)
+				.with(INACTIVE, InactiveSelection.NONE));
 	}
 
 	// append our properties to the state manager, so the game knows our block actually needs them
