@@ -15,6 +15,8 @@ import javax.annotation.Nullable;
 
 public class AndGateBlock extends Block implements Waterloggable {
 	//declare our properties - waterloggability, north/south/east/orientation, logic mode, and which input is inactive
+public class AndGateBlock extends Block {
+	// declare our properties - waterloggability, north/south/east/orientation, logic mode, and which input is inactive
 	public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 	public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 	public static final BooleanProperty BOOLEAN_MODE = BooleanProperty.of("boolean_mode");
@@ -24,13 +26,13 @@ public class AndGateBlock extends Block implements Waterloggable {
 		super(settings);
 	}
 
-	//append our properties to the state manager, so the game knows our block actually needs them
+	// append our properties to the state manager, so the game knows our block actually needs them
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
 		builder.add(WATERLOGGED, FACING, BOOLEAN_MODE, INACTIVE);
 	}
 
-	//set our placement state, so it faces away from the player when placed
+	// set our placement state, so it faces away from the player when placed
 	@Nullable
 	@Override
 	public BlockState getPlacementState(ItemPlacementContext ctx) {
