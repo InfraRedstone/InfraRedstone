@@ -15,8 +15,6 @@ import javax.annotation.Nullable;
 
 public class AndGateBlock extends Block implements Waterloggable {
 	//declare our properties - waterloggability, north/south/east/orientation, logic mode, and which input is inactive
-public class AndGateBlock extends Block {
-	// declare our properties - waterloggability, north/south/east/orientation, logic mode, and which input is inactive
 	public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 	public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 	public static final BooleanProperty BOOLEAN_MODE = BooleanProperty.of("boolean_mode");
