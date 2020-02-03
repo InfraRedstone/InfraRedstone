@@ -3,6 +3,7 @@ package com.elytradev.infraredstone.block.enums;
 import net.minecraft.util.StringIdentifiable;
 
 public enum InactiveSelection implements StringIdentifiable {
+	NONE("none"),
 	LEFT("left"),
 	BACK("back"),
 	RIGHT("right");
@@ -24,6 +25,6 @@ public enum InactiveSelection implements StringIdentifiable {
 				return sel;
 			}
 		}
-		return BACK;
+		return NONE;
 	}
 }
