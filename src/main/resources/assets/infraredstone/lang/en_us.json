@@ -26,5 +26,6 @@
 
   "container.infraredstone.oscillator": "Oscillator",
 
-  "itemGroup.infraredstone.infra_redstone_tab": "Infra-Redstone"
+  "itemGroup.infraredstone.infra_redstone_tab": "Infra-Redstone",
+  "itemGroup.infraredstone.in_red_group": "Infra-Redstone"
 }
