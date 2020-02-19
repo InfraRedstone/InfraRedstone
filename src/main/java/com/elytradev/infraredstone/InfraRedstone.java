@@ -1,7 +1,10 @@
 package com.elytradev.infraredstone;
 
+import com.elytradev.infraredstone.api.InRedSignalComponent;
 import com.elytradev.infraredstone.block.InRedBlocks;
 import com.elytradev.infraredstone.item.InRedItems;
+import nerdhub.cardinal.components.api.ComponentRegistry;
+import nerdhub.cardinal.components.api.ComponentType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
@@ -17,10 +20,16 @@ public class InfraRedstone implements ModInitializer {
 
 	public static final Logger logger = LogManager.getLogger();
 
+	public static final ComponentType<InRedSignalComponent> IN_RED_COMPONENT =
+			ComponentRegistry.INSTANCE.registerIfAbsent(
+					new Identifier(MODID, "in_red_signal"),
+					InRedSignalComponent.class
+			);
+
 	@Override
 	public void onInitialize() {
 		InRedBlocks.init();
 		InRedItems.init();
-		logger.info("I have initialized. UwU");
+		logger.info("[InfraRedstone] I have initialized. UwU");
 	}
 }

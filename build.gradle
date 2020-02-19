@@ -25,7 +25,7 @@ repositories {
 	mavenCentral()
 	maven { url "http://maven.fabricmc.net/" } // Fabric maven - home of Fabric API and ModMenu
 	maven { url "http://server.bbkr.space:8081/artifactory/libs-release" } // Cotton maven - home of Cotton projects
-	maven { url "https://maven.abusedmaster.xyz" } // NerdHub maven - home of Cardinal Components
+	maven { url "https://maven.onyxstudios.dev" } // Onyx Studios maven - home of Cardinal Components
 	maven { url "https://minecraft.curseforge.com/api/maven" }
 }
 
@@ -36,6 +36,13 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 	modApi "io.github.prospector:modmenu:1.8.4+build.20"
+
+	modImplementation "com.github.NerdHubMC.Cardinal-Components-API:cardinal-components-base:${project.cardinal_version}"
+	modImplementation "com.github.NerdHubMC.Cardinal-Components-API:cardinal-components-block:${project.cardinal_version}"
+
+	include "com.github.NerdHubMC.Cardinal-Components-API:cardinal-components-base:${project.cardinal_version}"
+	include "com.github.NerdHubMC.Cardinal-Components-API:cardinal-components-block:${project.cardinal_version}"
+
 
 	// excluding because we want to avoid an old, broken version of modmenu
 	//modImplementation("me.shedaniel:RoughlyEnoughItems:3.3.8") { exclude module: "ModMenu" }

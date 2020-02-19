@@ -1,5 +1,9 @@
 package com.elytradev.infraredstone.block;
 
+import com.elytradev.infraredstone.InfraRedstone;
+import nerdhub.cardinal.components.api.ComponentType;
+import nerdhub.cardinal.components.api.component.BlockComponentProvider;
+import nerdhub.cardinal.components.api.component.Component;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
@@ -11,13 +15,16 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
+import java.util.Set;
 
-public abstract class ModuleBaseBlock extends Block implements Waterloggable {
+public abstract class ModuleBaseBlock extends Block implements Waterloggable, BlockEntityProvider, BlockComponentProvider {
 	public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 	public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
@@ -41,5 +48,35 @@ public abstract class ModuleBaseBlock extends Block implements Waterloggable {
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext ePos) {
 		return BASE_SHAPE;
+	}
+
+	abstract Set<Direction> getOutputDirections(BlockView view, BlockPos pos, BlockState state);
+	abstract Set<Direction> getInputDirections(BlockView view, BlockPos pos, BlockState state);
+
+	@Override
+	public <T extends Component> boolean hasComponent(BlockView view, BlockPos pos, ComponentType<T> type, @Nullable Direction direction) {
+		if (type == InfraRedstone.IN_RED_COMPONENT) {
+			BlockState state = view.getBlockState(pos);
+			return getInputDirections(view, pos, state).contains(direction) || getOutputDirections(view, pos, state).contains(direction);
+		}
+		return false;
+	}
+
+	@Nullable
+	@Override
+	public <T extends Component> T getComponent(BlockView view, BlockPos pos, ComponentType<T> type, @Nullable Direction direction) {
+
+		return null;
+	}
+
+	@Override
+	public Set<ComponentType<?>> getComponentTypes(BlockView view, BlockPos pos, @Nullable Direction direction) {
+		BlockState state = view.getBlockState(pos);
+		if (getInputDirections(view, pos, state).contains(direction) || getOutputDirections(view, pos, state).contains(direction)) {
+			Set<ComponentType<?>> ret = new HashSet<>();
+			ret.add(InfraRedstone.IN_RED_COMPONENT);
+			return ret;
+		}
+		return new HashSet<>();
 	}
 }
