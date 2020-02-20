@@ -55,7 +55,7 @@ public abstract class ModuleBaseBlock extends Block implements Waterloggable, Bl
 
 	@Override
 	public <T extends Component> boolean hasComponent(BlockView view, BlockPos pos, ComponentType<T> type, @Nullable Direction direction) {
-		if (type == InfraRedstone.IN_RED_COMPONENT) {
+		if (type == InfraRedstone.IN_RED_SIGNAL) {
 			BlockState state = view.getBlockState(pos);
 			return getInputDirections(view, pos, state).contains(direction) || getOutputDirections(view, pos, state).contains(direction);
 		}
@@ -74,7 +74,7 @@ public abstract class ModuleBaseBlock extends Block implements Waterloggable, Bl
 		BlockState state = view.getBlockState(pos);
 		if (getInputDirections(view, pos, state).contains(direction) || getOutputDirections(view, pos, state).contains(direction)) {
 			Set<ComponentType<?>> ret = new HashSet<>();
-			ret.add(InfraRedstone.IN_RED_COMPONENT);
+			ret.add(InfraRedstone.IN_RED_SIGNAL);
 			return ret;
 		}
 		return new HashSet<>();

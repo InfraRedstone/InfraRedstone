@@ -1,13 +1,18 @@
 package com.elytradev.infraredstone.block;
 
 import com.elytradev.infraredstone.InfraRedstone;
+import com.elytradev.infraredstone.block.entity.DiodeBlockEntity;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+
+import java.util.function.Supplier;
 
 public class InRedBlocks {
 	public static final Block INFRA_REDSTONE = register(new InfraRedstoneCableBlock(defaultSettings()), "infra_redstone");
@@ -22,10 +27,16 @@ public class InRedBlocks {
 	public static final Block OSCILLATOR = register(new OscillatorBlock(defaultSettings()), "oscillator");
 	public static final Block ENCODER = register(new EncoderBlock(defaultSettings()), "encoder");
 
+	public static final BlockEntityType<DiodeBlockEntity> DIODE_BE = register(DiodeBlockEntity::new, "diode", DIODE);
+
 	public static Block register(Block block, String name) {
 		Registry.register(Registry.BLOCK, new Identifier(InfraRedstone.MODID, name), block);
 		Registry.register(Registry.ITEM, new Identifier(InfraRedstone.MODID, name), new BlockItem(block, new Item.Settings().group(InfraRedstone.IN_RED_GROUP)));
 		return block;
+	}
+
+	public static <T extends BlockEntity> BlockEntityType<T> register(Supplier<T> supplier, String name, Block... blocks) {
+		return Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(InfraRedstone.MODID, name), BlockEntityType.Builder.create(supplier, blocks).build(null));
 	}
 	
 	public static Block.Settings defaultSettings() {

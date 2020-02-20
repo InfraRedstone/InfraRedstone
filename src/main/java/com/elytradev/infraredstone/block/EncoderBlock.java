@@ -7,6 +7,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.Set;
 
 public class EncoderBlock extends ModuleBaseBlock {
@@ -16,12 +17,14 @@ public class EncoderBlock extends ModuleBaseBlock {
 
 	@Override
 	Set<Direction> getOutputDirections(BlockView view, BlockPos pos, BlockState state) {
-		return null;
+		Set<Direction> ret = new HashSet<>();
+		ret.add(state.get(FACING));
+		return ret;
 	}
 
 	@Override
 	Set<Direction> getInputDirections(BlockView view, BlockPos pos, BlockState state) {
-		return null;
+		return new HashSet<>();
 	}
 
 	@Nullable

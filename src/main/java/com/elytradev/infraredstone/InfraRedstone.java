@@ -20,7 +20,7 @@ public class InfraRedstone implements ModInitializer {
 
 	public static final Logger logger = LogManager.getLogger();
 
-	public static final ComponentType<InRedSignalComponent> IN_RED_COMPONENT =
+	public static final ComponentType<InRedSignalComponent> IN_RED_SIGNAL =
 			ComponentRegistry.INSTANCE.registerIfAbsent(
 					new Identifier(MODID, "in_red_signal"),
 					InRedSignalComponent.class
