@@ -1,13 +1,19 @@
 package com.elytradev.infraredstone.block;
 
+import com.elytradev.infraredstone.block.entity.DiodeBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.HashSet;
@@ -23,6 +29,12 @@ public class DiodeBlock extends ModuleBaseBlock {
 
 	public DiodeBlock(Settings settings) {
 		super(settings);
+	}
+
+	@Override
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		//TODO: toggle bits
+		return super.onUse(state, world, pos, player, hand, hit);
 	}
 
 	@Override
@@ -48,6 +60,15 @@ public class DiodeBlock extends ModuleBaseBlock {
 	@Nullable
 	@Override
 	public BlockEntity createBlockEntity(BlockView view) {
-		return null;
+		return new DiodeBlockEntity();
+	}
+
+	@Override
+	public int getStrongRedstonePower(BlockState state, BlockView view, BlockPos pos, Direction facing) {
+		if (facing == state.get(FACING)) {
+			DiodeBlockEntity be = (DiodeBlockEntity)view.getBlockEntity(pos);
+			return (int) Math.floor(be.getOutputSignal() / 4d);
+		}
+		return super.getStrongRedstonePower(state, view, pos, facing);
 	}
 }

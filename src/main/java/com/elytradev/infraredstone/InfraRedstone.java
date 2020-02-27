@@ -1,5 +1,6 @@
 package com.elytradev.infraredstone;
 
+import com.elytradev.infraredstone.api.InRedCableComponent;
 import com.elytradev.infraredstone.api.InRedSignalComponent;
 import com.elytradev.infraredstone.block.InRedBlocks;
 import com.elytradev.infraredstone.item.InRedItems;
@@ -16,7 +17,11 @@ import org.apache.logging.log4j.Logger;
 public class InfraRedstone implements ModInitializer {
 	public static final String MODID = "infraredstone";
 
-	public static final ItemGroup IN_RED_GROUP = FabricItemGroupBuilder.build(new Identifier(MODID, "in_red_group"), () -> new ItemStack(InRedBlocks.INFRA_REDSTONE));
+	public static final ItemGroup IN_RED_GROUP =
+			FabricItemGroupBuilder.build(
+				new Identifier(MODID, "in_red_group"),
+				() -> new ItemStack(InRedBlocks.INFRA_REDSTONE)
+		);
 
 	public static final Logger logger = LogManager.getLogger();
 
@@ -24,6 +29,11 @@ public class InfraRedstone implements ModInitializer {
 			ComponentRegistry.INSTANCE.registerIfAbsent(
 					new Identifier(MODID, "in_red_signal"),
 					InRedSignalComponent.class
+			);
+	public static final ComponentType<InRedCableComponent> IN_RED_CABLE =
+			ComponentRegistry.INSTANCE.registerIfAbsent(
+					new Identifier(MODID, "in_red_cable"),
+					InRedCableComponent.class
 			);
 
 	@Override

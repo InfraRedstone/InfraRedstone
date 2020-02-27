@@ -1,6 +1,8 @@
 package com.elytradev.infraredstone.block;
 
 import com.elytradev.infraredstone.InfraRedstone;
+import com.elytradev.infraredstone.impl.ModuleInputSignal;
+import com.elytradev.infraredstone.impl.ModuleOutputSignal;
 import nerdhub.cardinal.components.api.ComponentType;
 import nerdhub.cardinal.components.api.component.BlockComponentProvider;
 import nerdhub.cardinal.components.api.component.Component;
@@ -21,6 +23,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -64,8 +67,16 @@ public abstract class ModuleBaseBlock extends Block implements Waterloggable, Bl
 
 	@Nullable
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T extends Component> T getComponent(BlockView view, BlockPos pos, ComponentType<T> type, @Nullable Direction direction) {
-
+		if (type == InfraRedstone.IN_RED_SIGNAL) {
+			BlockState state = view.getBlockState(pos);
+			if (getInputDirections(view, pos, state).contains(direction)) {
+				return (T) ModuleInputSignal.INSTANCE;
+			} else if (getOutputDirections(view, pos, state).contains(direction)) {
+				return (T) new ModuleOutputSignal(view, pos);
+			}
+		}
 		return null;
 	}
 
@@ -73,9 +84,7 @@ public abstract class ModuleBaseBlock extends Block implements Waterloggable, Bl
 	public Set<ComponentType<?>> getComponentTypes(BlockView view, BlockPos pos, @Nullable Direction direction) {
 		BlockState state = view.getBlockState(pos);
 		if (getInputDirections(view, pos, state).contains(direction) || getOutputDirections(view, pos, state).contains(direction)) {
-			Set<ComponentType<?>> ret = new HashSet<>();
-			ret.add(InfraRedstone.IN_RED_SIGNAL);
-			return ret;
+			return Collections.singleton(InfraRedstone.IN_RED_SIGNAL);
 		}
 		return new HashSet<>();
 	}
