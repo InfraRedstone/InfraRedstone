@@ -16,6 +16,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -45,16 +46,12 @@ public class DiodeBlock extends ModuleBaseBlock {
 
 	@Override
 	Set<Direction> getOutputDirections(BlockView view, BlockPos pos, BlockState state) {
-		Set<Direction> ret = new HashSet<>();
-		ret.add(state.get(FACING));
-		return ret;
+		return Collections.singleton(state.get(FACING));
 	}
 
 	@Override
 	Set<Direction> getInputDirections(BlockView view, BlockPos pos, BlockState state) {
-		Set<Direction> ret = new HashSet<>();
-		ret.add(state.get(FACING).getOpposite());
-		return ret;
+		return Collections.singleton(state.get(FACING).getOpposite());
 	}
 
 	@Nullable
