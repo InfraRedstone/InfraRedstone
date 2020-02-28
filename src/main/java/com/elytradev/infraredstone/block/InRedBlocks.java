@@ -1,6 +1,7 @@
 package com.elytradev.infraredstone.block;
 
 import com.elytradev.infraredstone.InfraRedstone;
+import com.elytradev.infraredstone.block.entity.AndGateBlockEntity;
 import com.elytradev.infraredstone.block.entity.DiodeBlockEntity;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -28,6 +29,7 @@ public class InRedBlocks {
 	public static final Block ENCODER = register(new EncoderBlock(defaultSettings()), "encoder");
 
 	public static final BlockEntityType<DiodeBlockEntity> DIODE_BE = register(DiodeBlockEntity::new, "diode", DIODE);
+	public static final BlockEntityType<AndGateBlockEntity> AND_GATE_BE = register(AndGateBlockEntity::new, "and_gate", AND_GATE);
 
 	public static Block register(Block block, String name) {
 		Registry.register(Registry.BLOCK, new Identifier(InfraRedstone.MODID, name), block);

@@ -47,4 +47,6 @@ public class AndGateBlock extends ModuleBaseBlock {
 	public BlockEntity createBlockEntity(BlockView view) {
 		return null;
 	}
+
+
 }
