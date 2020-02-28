@@ -17,7 +17,6 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 
 public class DiodeBlock extends ModuleBaseBlock {
@@ -62,10 +61,22 @@ public class DiodeBlock extends ModuleBaseBlock {
 
 	@Override
 	public int getStrongRedstonePower(BlockState state, BlockView view, BlockPos pos, Direction facing) {
-		if (facing == state.get(FACING)) {
+		if (facing == state.get(FACING).getOpposite()) {
 			DiodeBlockEntity be = (DiodeBlockEntity)view.getBlockEntity(pos);
-			return (int) Math.floor(be.getOutputSignal() / 4d);
+			int signal = be.getOutputSignal();
+			return (int) Math.floor(signal / 4d);
 		}
 		return super.getStrongRedstonePower(state, view, pos, facing);
 	}
+
+	@Override
+	public int getWeakRedstonePower(BlockState state, BlockView view, BlockPos pos, Direction facing) {
+		return getStrongRedstonePower(state, view, pos, facing);
+	}
+
+	@Override
+	public boolean emitsRedstonePower(BlockState state) {
+		return true;
+	}
+
 }

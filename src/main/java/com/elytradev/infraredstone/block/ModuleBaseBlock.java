@@ -35,6 +35,7 @@ public abstract class ModuleBaseBlock extends Block implements Waterloggable, Bl
 
 	public ModuleBaseBlock(Settings settings) {
 		super(settings);
+		setDefaultState(this.getStateManager().getDefaultState().with(WATERLOGGED, false));
 	}
 
 	@Override

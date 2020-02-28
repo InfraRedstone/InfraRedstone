@@ -57,13 +57,16 @@ public class DiodeBlockEntity extends ModuleBaseBlockEntity {
 		int back = InRedLogic.findIRValue(world, pos, dir);
 		if (back == 0) {
 			//no IR signal, so get redstone input and multiply by 4
+			//TODO: temporary, this actually belongs in the Encoder
 			BlockPos newPos = pos.offset(dir);
-			back = world.getBlockState(newPos).getStrongRedstonePower(world, newPos, dir.getOpposite()) * 4;
+			back = world.getEmittedRedstonePower(newPos, dir.getOpposite()) * 4;
 		}
 		signal = back & getBitMask();
 		if (signal != lastSignal) {
 			lastSignal = signal;
-			sync();
+			if (!world.isClient) sync();
+			BlockPos frontPos = pos.offset(dir.getOpposite());
+			world.getBlockState(frontPos).neighborUpdate(world, frontPos, state.getBlock(), pos, true);
 		}
 	}
 
@@ -71,12 +74,12 @@ public class DiodeBlockEntity extends ModuleBaseBlockEntity {
 		int ret = 0;
 		BlockState state = getCachedState();
 		//a bit being false means that signal is allowed through
-		if (!state.get(DiodeBlock.BIT_0)) ret |= 0b00_0001;
-		if (!state.get(DiodeBlock.BIT_1)) ret |= 0b00_0010;
-		if (!state.get(DiodeBlock.BIT_2)) ret |= 0b00_0100;
-		if (!state.get(DiodeBlock.BIT_3)) ret |= 0b00_1000;
-		if (!state.get(DiodeBlock.BIT_4)) ret |= 0b01_0000;
-		if (!state.get(DiodeBlock.BIT_5)) ret |= 0b10_0000;
+		if (state.get(DiodeBlock.BIT_0)) ret |= 0b00_0001;
+		if (state.get(DiodeBlock.BIT_1)) ret |= 0b00_0010;
+		if (state.get(DiodeBlock.BIT_2)) ret |= 0b00_0100;
+		if (state.get(DiodeBlock.BIT_3)) ret |= 0b00_1000;
+		if (state.get(DiodeBlock.BIT_4)) ret |= 0b01_0000;
+		if (state.get(DiodeBlock.BIT_5)) ret |= 0b10_0000;
 		return ret;
 	}
 }

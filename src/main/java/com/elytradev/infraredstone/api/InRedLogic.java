@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 public class InRedLogic {
 	public static boolean isIRTick() {
-		//TODO: impl
+		//TODO: impl - once every other tick by default, possibly configurable?
 		return true;
 	}
 
