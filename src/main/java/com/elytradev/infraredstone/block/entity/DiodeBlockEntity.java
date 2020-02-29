@@ -40,16 +40,6 @@ public class DiodeBlockEntity extends ModuleBaseBlockEntity {
 	}
 
 	@Override
-	public void fromClientTag(CompoundTag tag) {
-		fromTag(tag);
-	}
-
-	@Override
-	public CompoundTag toClientTag(CompoundTag tag) {
-		return toTag(tag);
-	}
-
-	@Override
 	public void updateSignal() {
 		BlockState state = getCachedState();
 		Direction dir = state.get(ModuleBaseBlock.FACING).getOpposite();
