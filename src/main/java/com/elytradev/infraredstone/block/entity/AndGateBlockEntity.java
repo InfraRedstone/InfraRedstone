@@ -1,8 +1,13 @@
 package com.elytradev.infraredstone.block.entity;
 
+import com.elytradev.infraredstone.api.InRedLogic;
+import com.elytradev.infraredstone.block.AndGateBlock;
 import com.elytradev.infraredstone.block.InRedBlocks;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.WorldPosition;
 
 public class AndGateBlockEntity extends ModuleBaseBlockEntity {
     private int lastSignal = 0;
@@ -19,7 +24,36 @@ public class AndGateBlockEntity extends ModuleBaseBlockEntity {
 
     @Override
     public void updateSignal() {
-        // TODO: signal update logic
+        BlockState state = getCachedState();
+        Direction front = state.get(AndGateBlock.FACING);
+        Direction left = front.rotateYCounterclockwise();
+        Direction back = front.getOpposite();
+        Direction right = front.rotateYClockwise();
+        int signalLeft = InRedLogic.findIRValue(world, pos, left);
+        int signalBack = InRedLogic.findIRValue(world, pos, back);
+        int signalRight = InRedLogic.findIRValue(world, pos, right);
+        int value;
+
+        switch(state.get(AndGateBlock.INACTIVE)) {
+            case LEFT:
+                value = signalBack & signalRight;
+                break;
+            case BACK:
+                value = signalLeft & signalRight;
+                break;
+            case RIGHT:
+                value = signalLeft & signalBack;
+                break;
+            default:
+                value = signalLeft & signalBack & signalRight;
+        }
+
+        signal = value;
+
+        if (signal != lastSignal) {
+            lastSignal = signal;
+            if (!world.isClient) sync();
+        }
     }
 
     //TODO: put fromTag and toTag stuff into module base?
