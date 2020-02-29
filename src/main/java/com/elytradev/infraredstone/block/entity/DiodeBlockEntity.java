@@ -10,7 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
 public class DiodeBlockEntity extends ModuleBaseBlockEntity {
-	private int lastSignal = 0;
+	private int lastSignal = -1;
 	private int signal = 0;
 
 	public DiodeBlockEntity() {
@@ -52,6 +52,7 @@ public class DiodeBlockEntity extends ModuleBaseBlockEntity {
 			back = world.getEmittedRedstonePower(newPos, dir.getOpposite()) * 4;
 		}
 		signal = back & getBitMask();
+		System.out.println("Diode at " + pos.toString() + " has signal " + signal);
 		if (signal != lastSignal) {
 			lastSignal = signal;
 			if (!world.isClient) sync();

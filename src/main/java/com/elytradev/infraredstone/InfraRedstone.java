@@ -1,6 +1,7 @@
 package com.elytradev.infraredstone;
 
 import com.elytradev.infraredstone.api.InRedCableComponent;
+import com.elytradev.infraredstone.api.InRedLogic;
 import com.elytradev.infraredstone.api.InRedSignalComponent;
 import com.elytradev.infraredstone.block.InRedBlocks;
 import com.elytradev.infraredstone.item.InRedItems;
@@ -8,6 +9,7 @@ import nerdhub.cardinal.components.api.ComponentRegistry;
 import nerdhub.cardinal.components.api.ComponentType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.event.server.ServerTickCallback;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -40,6 +42,7 @@ public class InfraRedstone implements ModInitializer {
 	public void onInitialize() {
 		InRedBlocks.init();
 		InRedItems.init();
+		ServerTickCallback.EVENT.register(server -> InRedLogic.tickIR());
 		logger.info("[InfraRedstone] I have initialized. UwU");
 	}
 }

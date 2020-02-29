@@ -20,7 +20,7 @@ public abstract class ModuleBaseBlockEntity extends BlockEntity implements Block
 
 	@Override
 	public void tick() {
-		if (InRedLogic.isIRTick()) {
+		if (InRedLogic.isIRTick() && !world.isClient) {
 			updateSignal();
 		}
 	}

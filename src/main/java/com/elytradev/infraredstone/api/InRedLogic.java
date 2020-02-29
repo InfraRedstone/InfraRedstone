@@ -8,9 +8,16 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 public class InRedLogic {
+	private static final int INTER_IR_TICKS = 20;
+	private static int CURRENT_TICKS = 0;
+
 	public static boolean isIRTick() {
-		//TODO: impl - once every other tick by default, possibly configurable?
-		return true;
+		return CURRENT_TICKS == 0;
+	}
+
+	public static void tickIR() {
+		CURRENT_TICKS++;
+		CURRENT_TICKS %= INTER_IR_TICKS;
 	}
 
 	public static int findIRValue(World world, BlockPos pos, Direction searchDir) {

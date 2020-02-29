@@ -10,7 +10,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.WorldPosition;
 
 public class AndGateBlockEntity extends ModuleBaseBlockEntity {
-    private int lastSignal = 0;
+    private int lastSignal = -1;
     private int signal = 0;
 
     public AndGateBlockEntity() {
@@ -49,7 +49,7 @@ public class AndGateBlockEntity extends ModuleBaseBlockEntity {
         }
 
         signal = value;
-
+        System.out.println("and gate has signal " + signal);
         if (signal != lastSignal) {
             lastSignal = signal;
             if (!world.isClient) sync();
