@@ -72,16 +72,4 @@ public class AndGateBlockEntity extends ModuleBaseBlockEntity {
         lastSignal = tag.getInt("LastSignal");
         return tag;
     }
-
-    @Override
-    public void fromClientTag(CompoundTag tag) {
-        fromTag(tag);
-    }
-
-    @Override
-    public CompoundTag toClientTag(CompoundTag tag) {
-        return toTag(tag);
-    }
-
-
 }
