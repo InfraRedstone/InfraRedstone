@@ -58,10 +58,4 @@ public class NotGateBlockEntity extends ModuleBaseBlockEntity {
         lastSignal = tag.getInt("LastSignal");
         return tag;
     }
-
-    @Nullable
-    @Override
-    public BlockEntity createBlockEntity(BlockView view) {
-        return new NotGateBlockEntity();
-    }
 }
