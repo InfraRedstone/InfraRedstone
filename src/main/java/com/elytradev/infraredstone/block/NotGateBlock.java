@@ -1,5 +1,6 @@
 package com.elytradev.infraredstone.block;
 
+import com.elytradev.infraredstone.block.entity.NotGateBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Waterloggable;
@@ -42,6 +43,6 @@ public class NotGateBlock extends ModuleBaseBlock {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockView view) {
-        return null;
+        return new NotGateBlockEntity();
     }
 }

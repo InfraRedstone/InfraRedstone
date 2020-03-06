@@ -27,3 +27,7 @@ Thumbs.db
 .DS_Store
 local.properties
 .directory
+.Trash
+
+# Alexandria's sloppy programming files
+notes.md

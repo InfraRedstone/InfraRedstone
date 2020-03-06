@@ -4,16 +4,20 @@ import com.elytradev.infraredstone.api.InRedLogic;
 import com.elytradev.infraredstone.block.AndGateBlock;
 import com.elytradev.infraredstone.block.InRedBlocks;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.BlockView;
+
+import javax.annotation.Nullable;
 
 public class NotGateBlockEntity extends ModuleBaseBlockEntity {
     private int lastSignal = -1;
     private int signal = 0;
 
 
-    public NotGateBlockEntity(BlockEntityType<?> type) {
+    public NotGateBlockEntity() {
         super(InRedBlocks.NOT_GATE_BE);
     }
 
@@ -53,5 +57,11 @@ public class NotGateBlockEntity extends ModuleBaseBlockEntity {
         signal = tag.getInt("Signal");
         lastSignal = tag.getInt("LastSignal");
         return tag;
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(BlockView view) {
+        return new NotGateBlockEntity();
     }
 }

@@ -30,6 +30,7 @@ public class InRedBlocks {
 
 	public static final BlockEntityType<DiodeBlockEntity> DIODE_BE = register(DiodeBlockEntity::new, "diode", DIODE);
 	public static final BlockEntityType<AndGateBlockEntity> AND_GATE_BE = register(AndGateBlockEntity::new, "and_gate", AND_GATE);
+	public static final BlockEntityType<AndGateBlockEntity> NOT_GATE_BE = register(AndGateBlockEntity::new, "not_gate", NOT_GATE);
 
 	public static Block register(Block block, String name) {
 		Registry.register(Registry.BLOCK, new Identifier(InfraRedstone.MODID, name), block);
