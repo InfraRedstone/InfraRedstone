@@ -15,6 +15,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.Set;
 
 public class NotGateBlock extends ModuleBaseBlock {
@@ -32,12 +33,12 @@ public class NotGateBlock extends ModuleBaseBlock {
 
     @Override
     Set<Direction> getOutputDirections(BlockView view, BlockPos pos, BlockState state) {
-        return null;
+        return Collections.singleton(state.get(FACING));
     }
 
     @Override
     Set<Direction> getInputDirections(BlockView view, BlockPos pos, BlockState state) {
-        return null;
+        return Collections.singleton(state.get(FACING).getOpposite());
     }
 
     @Nullable
