@@ -26,7 +26,7 @@ public class XorGateBlockEntity extends ModuleBaseBlockEntity {
 
         if (signal != lastSignal) {
             lastSignal = signal;
-            if (!world.isClient) sync();
+            if (!world.isClient) save();
         }
     }
 

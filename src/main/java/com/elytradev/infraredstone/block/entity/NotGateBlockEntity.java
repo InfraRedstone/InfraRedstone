@@ -1,16 +1,11 @@
 package com.elytradev.infraredstone.block.entity;
 
 import com.elytradev.infraredstone.api.InRedLogic;
-import com.elytradev.infraredstone.block.AndGateBlock;
 import com.elytradev.infraredstone.block.InRedBlocks;
+import com.elytradev.infraredstone.block.NotGateBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
-
-import javax.annotation.Nullable;
 
 public class NotGateBlockEntity extends ModuleBaseBlockEntity {
     private int lastSignal = -1;
@@ -29,9 +24,10 @@ public class NotGateBlockEntity extends ModuleBaseBlockEntity {
     @Override
     public void updateSignal() {
         BlockState state = getCachedState();
-        Direction front = state.get(AndGateBlock.FACING);
+        Direction front = state.get(NotGateBlock.FACING);
         Direction back = front.getOpposite();
         int signalBack = InRedLogic.findIRValue(world, pos, back);
+        System.out.println("Not gate finds signal of " + signalBack);
 
         int value = signalBack;
         // bitwise NOT

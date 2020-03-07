@@ -8,7 +8,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 public class InRedLogic {
-	private static final int INTER_IR_TICKS = 20;
+	private static final int INTER_IR_TICKS = 2;
 	private static int CURRENT_TICKS = 0;
 
 	public static boolean isIRTick() {
@@ -25,10 +25,12 @@ public class InRedLogic {
 		if (!checkCandidacy(world, initialPos, searchDir)) {
 			BlockPos up = initialPos.up();
 			if (checkCandidacy(world, up, searchDir)) {
+				System.out.println("Found a connection up");
 				initialPos = up;
 			} else {
 				BlockPos down = initialPos.down();
 				if (checkCandidacy(world, down, searchDir)) {
+					System.out.println("Found a connection down");
 					initialPos = down;
 				} else {
 					return world.getEmittedRedstonePower(initialPos, searchDir) != 0? 1 : 0;
@@ -43,6 +45,11 @@ public class InRedLogic {
 			return wireSearch(world, initialPos, searchDir);
 		}
 
+		if (provider.hasComponent(world, initialPos, InfraRedstone.IN_RED_SIGNAL, searchDir.getOpposite())) {
+			InRedSignalComponent comp = provider.getComponent(world, initialPos, InfraRedstone.IN_RED_SIGNAL, searchDir.getOpposite());
+			return comp.getSignalValue();
+		}
+
 		// Oh. Okay. No wires or machines. Well, return the vanilla redstone value as
 		// the bottom bit here and call it a day.
 		return (world.getEmittedRedstonePower(initialPos, searchDir) != 0) ? 1 : 0;
@@ -55,6 +62,10 @@ public class InRedLogic {
 		if (provider.hasComponent(world, pos, InfraRedstone.IN_RED_SIGNAL, side.getOpposite())) {
 			InRedSignalComponent comp = provider.getComponent(world, pos, InfraRedstone.IN_RED_SIGNAL, side.getOpposite());
 			return comp != null && comp.isOutput();
+		}
+		if (provider.hasComponent(world, pos, InfraRedstone.IN_RED_CABLE, side.getOpposite())) {
+			//TODO: still not 100% sure with cable component...
+			return true;
 		}
 		return false;
 	}

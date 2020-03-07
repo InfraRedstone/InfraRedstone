@@ -9,6 +9,7 @@ import net.minecraft.util.Tickable;
 
 public abstract class ModuleBaseBlockEntity extends BlockEntity implements BlockEntityClientSerializable, Tickable {
 	//TODO: signal and lastSignal fields here?
+	private boolean firstTick = true;
 
 	public ModuleBaseBlockEntity(BlockEntityType<?> type) {
 		super(type);
@@ -21,8 +22,26 @@ public abstract class ModuleBaseBlockEntity extends BlockEntity implements Block
 	@Override
 	public void tick() {
 		if (InRedLogic.isIRTick() && !world.isClient) {
+			if (firstTick) {
+				firstTick = false;
+				updateSignal();
+				save();
+			}
 			updateSignal();
 		}
+	}
+
+	@Override
+	public void fromTag(CompoundTag tag) {
+		super.fromTag(tag);
+		firstTick = tag.getBoolean("FirstTick");
+	}
+
+	@Override
+	public CompoundTag toTag(CompoundTag tag) {
+		super.toTag(tag);
+		tag.putBoolean("FirstTick", firstTick);
+		return tag;
 	}
 
 	@Override
@@ -36,7 +55,7 @@ public abstract class ModuleBaseBlockEntity extends BlockEntity implements Block
 	}
 
 	public void save() {
-		sync();
+		if (!world.isClient) sync();
 		markDirty();
 	}
 }
