@@ -40,7 +40,7 @@ public class NotGateBlockEntity extends ModuleBaseBlockEntity {
         signal = value;
         if (signal != lastSignal) {
             lastSignal = signal;
-            if (!world.isClient) sync();
+            if (!world.isClient) save();
         }
     }
 

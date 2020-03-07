@@ -55,7 +55,7 @@ public class DiodeBlockEntity extends ModuleBaseBlockEntity {
 		System.out.println("Diode at " + pos.toString() + " has signal " + signal);
 		if (signal != lastSignal) {
 			lastSignal = signal;
-			if (!world.isClient) sync();
+			if (!world.isClient) save();
 			BlockPos frontPos = pos.offset(dir.getOpposite());
 			world.getBlockState(frontPos).neighborUpdate(world, frontPos, state.getBlock(), pos, true);
 		}

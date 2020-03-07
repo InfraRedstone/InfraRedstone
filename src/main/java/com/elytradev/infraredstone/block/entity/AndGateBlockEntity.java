@@ -52,7 +52,7 @@ public class AndGateBlockEntity extends ModuleBaseBlockEntity {
         System.out.println("and gate has signal " + signal);
         if (signal != lastSignal) {
             lastSignal = signal;
-            if (!world.isClient) sync();
+            if (!world.isClient) save();
         }
     }
 

@@ -35,4 +35,8 @@ public abstract class ModuleBaseBlockEntity extends BlockEntity implements Block
 		return toTag(tag);
 	}
 
+	public void save() {
+		sync();
+		markDirty();
+	}
 }
