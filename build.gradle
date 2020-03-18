@@ -79,6 +79,16 @@ jar {
 
 // configure the maven publication
 publishing {
+	repositories {
+		maven {
+		    name = "GitHubPackages"
+		    url = uri("https://maven.pkg.github.com/infraredstone/infraredstone")
+		    credentials {
+			username = project.findProperty("gpr.user") ?: System.getenv("boundarybreaker")
+			password = project.findProperty("gpr.key") ?: System.getenv("901b0c80688deea2504453795d4ab5ea4ae6891f")
+		    }
+		}
+	}
 	publications {
 		maven(MavenPublication) {
 			// add all the jars that should be included when publishing to maven
